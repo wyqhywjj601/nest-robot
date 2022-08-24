@@ -4,6 +4,7 @@ const fs = require('fs');
 const token = 'aaaa';
 const robot_wxid = 'dajio001';
 import axios from 'axios';
+import { log } from 'console';
 import { WECHAT_API_URL } from './config';
 
 // 获取视频数据
@@ -61,13 +62,19 @@ export const mathRandom = (m, n) => {
  * @param data
  */
 export const postWechat = async (methodName: string, data: any) => {
-  const res = await axios.post(WECHAT_API_URL, {
-    ...data,
-    api: methodName,
-    token,
-    robot_wxid,
-  });
-  return res.data;
+  try {
+    const res = await axios.post(WECHAT_API_URL, {
+      ...data,
+      api: methodName,
+      token,
+      robot_wxid,
+    });
+    console.log('post done');
+
+    return res.data;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 /**
