@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const token = 'aaaa';
 const robot_wxid = 'dajio001';
@@ -6,9 +7,10 @@ import axios from 'axios';
 import { WECHAT_API_URL } from './config';
 
 // 获取视频数据
-export const getVideoData = (url, encoding) => {
+export const getVideoData = (url, encoding, type = 'http') => {
   return new Promise((resolve, reject) => {
-    const req = http.get(url, function (res) {
+    const httpType = type === 'http' ? http : https;
+    const req = httpType.get(url, function (res) {
       let result = '';
       encoding && res.setEncoding(encoding);
       res.on('data', function (d) {
@@ -30,7 +32,7 @@ export const getVideoData = (url, encoding) => {
  * @param fileName
  * @param fileData
  */
-export const savefileToPath = (fileFolder, fileName, fileData) => {
+export const savefileToPath = (fileFolder, fileName, fileData): any => {
   const fileFullName = `${fileFolder}/${fileName}.mp4`;
   return new Promise((resolve, reject) => {
     fs.writeFile(fileFullName, fileData, 'binary', function (err) {
@@ -65,6 +67,15 @@ export const postWechat = async (methodName: string, data: any) => {
     token,
     robot_wxid,
   });
-  console.log(res.data);
+  return res.data;
+};
+
+/**
+ * 爬取网站
+ * @param url
+ */
+export const spiderWeb = async (url: string): Promise<string> => {
+  const res = await axios.get(url);
+  // 获取html
   return res.data;
 };
