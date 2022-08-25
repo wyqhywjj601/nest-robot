@@ -64,11 +64,11 @@ export class GroupService {
   /**
    * 随机快手视频
    */
-  async sendKuai() {
+  async   sendKuai() {
     const url = 'https://mm.diskgirl.com/get/get1.php';
     let videoSrc = await axios.get(url);
     videoSrc = videoSrc?.data;
-    console.log(videoSrc, 'videoSrc');
+    console.log(process.cwd(), 'videoSrc');
 
     const videoRes = await getVideoData(videoSrc, 'binary', 'https');
     const fileFolder = 'E:\\project\\nest-robot\\video\\';

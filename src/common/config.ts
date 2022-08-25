@@ -1,1 +1,1 @@
-export const WECHAT_API_URL = 'https://443b-113-109-216-138.jp.ngrok.io';
+export const WECHAT_API_URL = 'https://d03d-113-109-216-138.jp.ngrok.io';
