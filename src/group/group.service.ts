@@ -4,6 +4,7 @@ import {
   savefileToPath,
   mathRandom,
   postWechat,
+  deleteFile
 } from '../common/utils';
 import axios from 'axios';
 import { log } from 'console';
@@ -23,7 +24,7 @@ export class GroupService {
   async sendMZ() {
     const videoId = mathRandom(1, 630);
     const fileFolder = 'E:\\project\\nest-robot\\video\\';
-    const groupId = `24388433906@chatroom`;
+    const groupId = `25286230018@chatroom`;
 
     if (fs.existsSync(`${fileFolder}${videoId}.mp4`)) {
       console.log(`文件已存在`);
@@ -68,20 +69,23 @@ export class GroupService {
     const url = 'https://mm.diskgirl.com/get/get1.php';
     let videoSrc = await axios.get(url);
     videoSrc = videoSrc?.data;
-    console.log(process.cwd(), 'videoSrc');
+    console.log(videoSrc, 'videoSrc');
 
     const videoRes = await getVideoData(videoSrc, 'binary', 'https');
-    const fileFolder = 'E:\\project\\nest-robot\\video\\';
-    const fileName = `kuaiVideo${new Date().getTime()}}`;
-    const groupId = `24388433906@chatroom`;
+    const fileFolder = `${process.cwd()}/video`;
+    const fileName = `video${new Date().getTime()}`;
+    const groupId = `25286230018@chatroom`;
 
     await savefileToPath(fileFolder, fileName, videoRes);
     console.log('save done');
 
     // 发送
-    return postWechat('SendVideoMsg', {
+    await postWechat('SendVideoMsg', {
       to_wxid: groupId,
-      path: `${fileFolder}${fileName}.mp4`,
+      path: `${fileFolder}/${fileName}.mp4`,
     });
+
+    // 删除文件
+    // deleteFile(fileFolder,`${fileName}.mp4`)
   }
 }

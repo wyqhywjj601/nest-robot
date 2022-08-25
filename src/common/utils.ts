@@ -4,7 +4,6 @@ const fs = require('fs');
 const token = 'aaaa';
 const robot_wxid = 'dajio001';
 import axios from 'axios';
-import { log } from 'console';
 import { WECHAT_API_URL } from './config';
 
 // 获取视频数据
@@ -69,7 +68,7 @@ export const postWechat = async (methodName: string, data: any) => {
       token,
       robot_wxid,
     });
-    console.log('post done');
+    console.log(res.data,'post done');
 
     return res.data;
   } catch (e) {
@@ -86,3 +85,10 @@ export const spiderWeb = async (url: string): Promise<string> => {
   // 获取html
   return res.data;
 };
+
+export const deleteFile = async (filePath:string,fileName:string) =>{
+  const err = fs.unlinkSync(`${filePath}/${fileName}`)
+  console.log(err,'success');
+  
+  if(!err) return 'success';
+}
