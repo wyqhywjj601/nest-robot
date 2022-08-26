@@ -11,9 +11,7 @@ export class AppController {
     return this.appService.getHello();
   }
   @Post('wechat')
-  Wechat(@Req() request: Request): object {
-    console.log(request.body);
-    
-    return {code:0}
+  wechat(@Req() request: Request): object {
+    return this.appService.wechat(request);
   }
 }

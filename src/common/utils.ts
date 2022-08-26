@@ -26,6 +26,7 @@ export const getVideoData = (url, encoding, type = 'http') => {
     req.end();
   });
 };
+
 /**
  * 下载视频到本地
  * @param fileFolder
