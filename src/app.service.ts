@@ -3,13 +3,12 @@ import { Request } from 'express';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello() {
+    return [1231];
   }
 
   wechat(request: Request){
     const {Event,content} = request?.body
-    console.log(Event,content);
     switch (Event) {
       // 单聊
       case 'EventPrivateChat': 
@@ -26,5 +25,9 @@ export class AppService {
     }
     
     return {};
+  }
+
+  trans(request: Request){
+
   }
 }
