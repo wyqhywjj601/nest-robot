@@ -7,7 +7,6 @@ import {
   deleteFile
 } from '../common/utils';
 import axios from 'axios';
-import { log } from 'console';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cheerio = require('cheerio');

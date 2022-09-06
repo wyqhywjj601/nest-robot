@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Request } from 'express';
+import axios from 'axios';
 
 @Injectable()
 export class AppService {
@@ -18,12 +19,18 @@ export class AppService {
       break;
       // 群聊
       case 'EventGroupChat':
-           
-    
+      console.log('接收到群聊消息');
+      const {from_group, // 来源群
+        from_name, // 来源
+        msg // 回复内容
+      } = content
+
+      break;
+      
       default:
         break;
     }
-    
+
     return {};
   }
 
